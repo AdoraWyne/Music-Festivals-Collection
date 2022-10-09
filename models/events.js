@@ -3,15 +3,17 @@ const mongoose = require("mongoose")
 
 // schema structure
 const eventSchema = new mongoose.Schema ({
-    location: { type: String, require: true},
-    date: {type: Date, min: Date.now, require: true},
     title: { type: String, require: true},
-    expectedAttendance: Number,
-    rate: {type: Number, require: true, min: 0},
+    location: { type: String, require: true},
+    website: String,
+    date: String,
     description: String,
-    availableRoles: [String],
-    requirements: [String],
-    vacancies: {type: Number, require: true, min: 0}
+    imageURL: String,
+    category: String,
+    rating: String, //Number?
+    attended: Boolean,
+    price: Number,
+    comment: String
 })
 
 // model
