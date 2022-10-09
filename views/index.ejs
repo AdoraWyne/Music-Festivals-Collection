@@ -1,0 +1,15 @@
+<%- include("./partials/head.ejs") %>
+
+<header>
+    <h1>Festivals Collection</h1>
+</header>
+
+<main>
+    <% events.forEach((event) => { %>
+        <a href="/events/<%= event._id %>"><img src="<%= event.imageURL %>" alt="<%= event.title %>"></a>
+    <% }) %>
+</main>
+
+
+<%- include("./partials/foot.ejs") %>
+
