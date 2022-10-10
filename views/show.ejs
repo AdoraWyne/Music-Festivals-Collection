@@ -1,0 +1,28 @@
+<%- include("./partials/head.ejs") %>
+
+<header>
+    <h1><%= event.title %></h1>
+    <!-- a link back to the collection main page-->
+    <a href="/events">Back to All Collections Page</a>
+    <!-- a link to edit this music fest -->
+    <a href="/events/<%= event._id %>">Edit this Music Festival</a>
+    <!-- a link to delete this music fest-->
+    <a href="/products/<%= product._id %>/delete">Delete this Music Festival.</a>
+</header>
+
+<main>
+    <h2><%= event.title %></h2>
+    <img src="<%= event.imageURL %>" alt="<%= event.title %>">
+    <p>Where: <%= event.location %></p>
+    <p>When: <%= event.date %></p>
+    <p>Category: <%= event.category %></p>
+    <p>Rating: <%= event.rating %> of 5</p>
+    <p>Ticket Price: <%= event.price %></p>
+    <p>Description: <%= event.description %></p>
+    <p>Note: <%= event.comment %></p>
+    <p>Read More Details at <a href="<%= event.website %>">here</a>.</p>
+    <!-- event.author.username comes from populate("user") -->
+    <p>Created by <%= event.author.username %>.</p>
+</main>
+
+<%- include("./partials/foot.ejs") %>

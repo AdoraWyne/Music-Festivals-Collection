@@ -5,9 +5,14 @@
 </header>
 
 <main>
+    <% if (events.length === 0) { %>
+        <p>Add music festivals to the collections <a href="/events/new">here</a>!</p>
+    <%  } else { %>
     <% events.forEach((event) => { %>
         <a href="/events/<%= event._id %>"><img src="<%= event.imageURL %>" alt="<%= event.title %>"></a>
     <% }) %>
+    <% } %>
+    
 </main>
 
 

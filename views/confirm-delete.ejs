@@ -1,0 +1,17 @@
+<%- include("./partials/head.ejs") %>
+
+<header>
+    <h1>Delete Confirmation</h1>
+    <!-- a link back to the collection main page-->
+    <a href="/events">Back to All Collections Page</a>
+</header>
+
+<main>
+    <h2>Are you sure you want to delete this music festival?</h2>
+    <form method="post" action="/events/<%= id %>?_method=DELETE">
+        <button type="submit">Yes</button>
+    </form>
+        <a href="/events"><button type="submit">No</button></a>
+</main>
+
+<%- include("./partials/foot.ejs") %>
