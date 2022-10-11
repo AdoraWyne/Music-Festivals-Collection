@@ -1,8 +1,11 @@
 // require stuff
 const express = require("express")
+const ensureLogin = require("connect-ensure-login")
 
 const Event = require("../models/events")
 const router = express.Router()
+router.use(ensureLogin.ensureLoggedIn())
+
 
 // -----------------------------------------------------------
 // INDEX
