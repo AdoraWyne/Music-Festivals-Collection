@@ -12,8 +12,8 @@ router.use(ensureLogin.ensureLoggedIn())
 router.get("/", async (req,res) => {
     const events = await Event.find()
     res.render("index.ejs", {
-        events: events,
-        tabTitle: "All Music Festivals Collection"
+        events, // destructing from events: events
+        tabTitle: "All Music Festivals Collection",
     })
 })
 
@@ -27,9 +27,13 @@ router.get("/new", (req, res) => {
 })
 
 // CREATE
-router.post("/", async (req, res) => {
+router.post("/new", async (req, res) => {
     try{
         await Event.create(req.body)
+        // Alternativaly for above line:
+        // const event = new Event(req.body)
+        // await event.save()
+        req.flash("success", "Added a new music festival!")
         res.redirect("/events")
     }
     catch{
@@ -56,8 +60,15 @@ router.put("/:id", async(req,res) => {
         req.body,
         {new: true}
     )
-    res.redirect(`/products/${req.params.id}`)
+    req.flash("success", `This music festival is updated`)
+    // req.flash("success", `${event.title} is updated`)
+    // req.flash("success", `${req.body.title} is updated`)
+    res.redirect(`/events/${req.params.id}`)
 })
+
+        // Alternativaly for above line:
+        // const event = new Event(req.body)
+        // await event.save()
 
 // -----------------------------------------------------------
 // DELETE
@@ -73,6 +84,7 @@ router.delete("/:id", async(req, res) => {
     const event = await Event.findByIdAndRemove(
         req.params.id
     )
+    req.flash("success", `This music festival is deleted`)
     res.redirect("/events")
 })
 

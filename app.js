@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const passport = require('passport')
 const methodOverride = require("method-override")
 const session = require("express-session")
+const flash = require('express-flash')
 const mongoDBSession = require("connect-mongodb-session")
 
 const Event = require("./models/events")
@@ -39,6 +40,7 @@ app.use(
         store: sessionStore
     })
 )
+app.use(flash())
 // passport has to be after session, ensure login session is restored in the correct order
 app.use(passport.initialize())
 app.use(passport.session())
@@ -49,7 +51,9 @@ passport.deserializeUser(User.deserializeUser())
 // -----------------------------------------------------------
 // homeBeforelogin route
 app.get("/homeBeforeLogin", (req,res) => {
-    res.render("homeBeforeLogin.ejs")
+    res.render("homeBeforeLogin.ejs", {
+        tabTitle: "Home"
+    })
 })
 
 

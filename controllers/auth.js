@@ -1,16 +1,10 @@
-// Before login routes handler-----------------------------------------------------------
+// Before login routes handler -----------------------------------------------------------
 // Require stuff
 const express = require("express")
 const passport = require("passport")
 const User = require("../models/users")
 
 const router = express.Router()
-
-
-// res.render("index.ejs", {
-//     events: events,
-//     tabTitle: "All Music Festivals Collection"
-// })
 
 // -----------------------------------------------------------
 // register route
@@ -22,25 +16,18 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req,res) => {
     const { username, password } = req.body
-    const user = await new User({username})
-    const registeredUser = await User.register(user, password)
-     // req.flash("success", "Welcome to RobDido Music Festival Collection!")
-    req.login(registeredUser, () => {
-        res.redirect("/events") // prefix routes cant access here, be explicit
-    })
+    try {
+        const user = await new User({username})
+        const registeredUser = await User.register(user, password)
+        req.login(registeredUser, () => {
+            req.flash("success", "Welcome to RobDido Music Festival Collection!")
+            res.redirect("/events") // prefix routes cant access here, be explicit
+        })
+    } catch (error) {
+        req.flash("error", error.message)
+        res.redirect("/events/register")
+    }
 })
-
-//     try{
-//         const user = await User.register(
-//             new User({username: username}),
-//             password
-//         )
-//         req.login(user, () => {
-//             res.redirect("/events")
-//         })
-//     } catch (error) {
-//         res.redirect("/register")
-//     }
 
 // -----------------------------------------------------------
 // login route
@@ -57,13 +44,13 @@ router.get("/login", (req,res) => {
 //     failureFlash: true
 // }))
 
-// but if I want to flash success msg
+// but if I want to flash success msg after login
 router.post("/login", 
     passport.authenticate("local", {
     failureMessage: true,
     failureRedirect: "/events/login"
 }), (req,res) => {
-    // req.flash("success", "Welcome Back!")
+    req.flash("success", "Welcome Back!")
     res.redirect("/events")
 })
 
@@ -71,9 +58,9 @@ router.post("/login",
 // logout route
 router.post("/logout", (req,res) => {
     req.logout(() => {
-        res.redirect("/events")
+        req.flash("success", "Sayonara!")
+        res.redirect("/homeBeforeLogin")
     })
-    // req.flash("success", "Sayonara!")
 })
 
 // -----------------------------------------------------------

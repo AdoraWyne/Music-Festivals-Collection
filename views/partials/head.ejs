@@ -9,8 +9,8 @@
 </head>
 <body>
 
-    <% if (tabTitle !== "Registration" && tabTitle !== "Login") { %>
-    <form action="/logout" method="post">
+    <% if (tabTitle !== "Registration" && tabTitle !== "Login" && tabTitle !== "Home") { %>
+    <form action="/events/logout" method="post">
         <button type="submit">Logout</button>
       </form>
       <% } %>

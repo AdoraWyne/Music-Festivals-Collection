@@ -1,5 +1,7 @@
 <%- include("./partials/head.ejs") %>
 
+<%- include('./partials/flash.ejs') %>
+
 <header>
     <h1><%= event.title %></h1>
     <!-- a link back to the collection main page-->
@@ -7,7 +9,7 @@
     <!-- a link to edit this music fest -->
     <a href="/events/<%= event._id %>">Edit this Music Festival</a>
     <!-- a link to delete this music fest-->
-    <a href="/products/<%= product._id %>/delete">Delete this Music Festival.</a>
+    <a href="/events/<%= event._id %>/delete">Delete this Music Festival.</a>
 </header>
 
 <main>
