@@ -40,7 +40,10 @@ app.use(
 
 
 // -----------------------------------------------------------
-// routes
+// homeBeforelogin route
+app.get("/homeBeforeLogin", (req,res) => {
+    res.render("homeBeforeLogin.ejs")
+})
 
 
 // -----------------------------------------------------------
