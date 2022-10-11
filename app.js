@@ -3,6 +3,7 @@
 //require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
+const passport = require('passport')
 const methodOverride = require("method-override")
 const session = require("express-session")
 const mongoDBSession = require("connect-mongodb-session")
@@ -10,8 +11,7 @@ const mongoDBSession = require("connect-mongodb-session")
 const Event = require("./models/events")
 const eventsController = require("./controllers/events")
 const authController = require("./controllers/auth")
-// const User = require("./models/users")
-// const authController = require("./controllers/auth")
+const User = require("./models/users")
 
 // -----------------------------------------------------------
 // Declare or execute stuff
@@ -38,7 +38,11 @@ app.use(
         store: sessionStore
     })
 )
-
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(User.createStrategy())
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 // -----------------------------------------------------------
 // homeBeforelogin route
