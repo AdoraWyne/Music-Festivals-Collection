@@ -1,16 +1,14 @@
-// // Before login -----------------------------------------------------------
-// // Require stuff
-// const express = require("express")
-// const passport = require("passport")
-// const User = require("../models/users")
+// Before login routes handler-----------------------------------------------------------
+// Require stuff
+const express = require("express")
 
-// const router = express.Router()
+const router = express.Router()
 
-// // -----------------------------------------------------------
-// // register route
-// router.get("/register", (req, res) => {
-//     res.render("register.ejs")
-// })
+// -----------------------------------------------------------
+// register route
+router.get("/register", (req, res) => {
+    res.render("register.ejs")
+})
 
 // router.post("/register", async (req, res) => {
 //     const {username, password} = req.body
@@ -28,12 +26,15 @@
 //     }
 // })
 
-// // -----------------------------------------------------------
-// // login route
+// -----------------------------------------------------------
+// login route
+router.get("/login", (req,res) => {
+    res.render("login.ejs")
+})
 
-// // -----------------------------------------------------------
-// // logout route
+// -----------------------------------------------------------
+// logout route
 
-// // -----------------------------------------------------------
-// // export
-// module.exports = router
+// -----------------------------------------------------------
+// export
+module.exports = router

@@ -9,6 +9,7 @@ const mongoDBSession = require("connect-mongodb-session")
 
 const Event = require("./models/events")
 const eventsController = require("./controllers/events")
+const authController = require("./controllers/auth")
 // const User = require("./models/users")
 // const authController = require("./controllers/auth")
 
@@ -48,8 +49,11 @@ app.get("/homeBeforeLogin", (req,res) => {
 
 // -----------------------------------------------------------
 // export from controller
-// prefix my routes here for events controller
+// prefix my routes here for events both controllers
+app.use("/events", authController)
 app.use("/events", eventsController)
+
+
 
 
 // -----------------------------------------------------------
