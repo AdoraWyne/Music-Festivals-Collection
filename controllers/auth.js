@@ -69,6 +69,12 @@ router.post("/login",
 
 // -----------------------------------------------------------
 // logout route
+router.post("/logout", (req,res) => {
+    req.logout(() => {
+        res.redirect("/events")
+    })
+    // req.flash("success", "Sayonara!")
+})
 
 // -----------------------------------------------------------
 // export

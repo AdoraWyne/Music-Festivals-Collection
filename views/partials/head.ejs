@@ -8,3 +8,9 @@
     <title>Festivals Collection | <%= typeof tabTitle === 'undefined' ? '' : tabTitle %></title>
 </head>
 <body>
+
+    <% if (tabTitle !== "Registration" && tabTitle !== "Login") { %>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+      </form>
+      <% } %>

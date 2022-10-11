@@ -16,3 +16,5 @@ category: {
 app.use("/events", authController)
 app.use("/events", eventsController)
 ```
+
+- Take out logout button on Register & Login pages by editing head.ejs
