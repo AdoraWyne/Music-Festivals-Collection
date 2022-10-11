@@ -10,8 +10,9 @@ const mongoDBSession = require("connect-mongodb-session")
 
 const Event = require("./models/events")
 const eventsController = require("./controllers/events")
-const authController = require("./controllers/auth")
 const User = require("./models/users")
+const authController = require("./controllers/auth")
+
 
 // -----------------------------------------------------------
 // Declare or execute stuff
@@ -38,6 +39,7 @@ app.use(
         store: sessionStore
     })
 )
+// passport has to be after session, ensure login session is restored in the correct order
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(User.createStrategy())

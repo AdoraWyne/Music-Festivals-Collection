@@ -8,7 +8,6 @@ const router = express.Router()
 // INDEX
 router.get("/", async (req,res) => {
     const events = await Event.find()
-    console.log(events);
     res.render("index.ejs", {
         events: events,
         tabTitle: "All Music Festivals Collection"
