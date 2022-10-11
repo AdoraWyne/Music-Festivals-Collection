@@ -66,10 +66,6 @@ router.put("/:id", async(req,res) => {
     res.redirect(`/events/${req.params.id}`)
 })
 
-        // Alternativaly for above line:
-        // const event = new Event(req.body)
-        // await event.save()
-
 // -----------------------------------------------------------
 // DELETE
 // Confirm to delete

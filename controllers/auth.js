@@ -32,11 +32,16 @@ router.post("/register", async (req,res) => {
 // -----------------------------------------------------------
 // login route
 router.get("/login", (req,res) => {
-    res.render("login.ejs", {
+    if (req.isAuthenticated()){ // if use logged in, return TRUE
+        res.redirect("back") // back to where the user came from
+    } else {
+        res.render("login.ejs", {
         tabTitle: "Login"
-    }) 
+        }) 
+    }
 })
 
+// for login POST route
 // this is what dido taught...
 // router.post("/login", passport.authenticate("local", {
 //     failureRedirect: "/events/login",
