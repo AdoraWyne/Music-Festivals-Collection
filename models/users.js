@@ -1,21 +1,21 @@
-// // requiring
-// const mongoose = require("mongoose")
-// const passportLocalMongoose = require("passport-local-mongoose")
+// requiring
+const mongoose = require("mongoose")
+const passportLocalMongoose = require("passport-local-mongoose")
 
-// const {Schema} = mongoose
+// declare
+const {Schema} = mongoose
 
-// const userSchema = new Schema({
-//     festCollection: eventSchema,
-//     wishList: [{type: Schema.Types.ObjectId, ref: "Event"}]
-// })
+// schema
+const userSchema = new Schema({
+    // festCollection: eventSchema,
+    wishList: [{type: Schema.Types.ObjectId, ref: "Event"}]
+})
 
-// // plugin
-// userSchema.plugin(passportLocalMongoose)
+// plugin
+userSchema.plugin(passportLocalMongoose)
 
-// // model
-// const User = mongoose.model("User", userSchema)
-// const Event = mongoose.model("Event", eventSchema)
+// model
+const User = mongoose.model("User", userSchema)
 
-// // export
-// module.exports = User
-// module.exports = Event
+// export
+module.exports = User
