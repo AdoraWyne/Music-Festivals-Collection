@@ -1,5 +1,11 @@
 <% Object.keys(messages).forEach((type) => { %>
     <% messages[type].forEach((msg) => { %>
-      <div class="<%= type %>"><%= msg %></div>
+      <!-- role="alert" is for screenreader to read "this is an alert" for visual impaired user -->
+      <div class="alert <%= type === "success"? "alert-success" : "alert-danger" %>" role="alert"><%= msg %>
+        <!-- Copied from Boostrap, a "x" to close the flash msg -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <% }) %>
   <% }) %>
