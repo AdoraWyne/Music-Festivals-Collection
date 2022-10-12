@@ -1,6 +1,7 @@
 // -----------------------------------------------------------
 // Require stuff 
-//require('dotenv').config()
+require('dotenv').config()
+
 const express = require("express")
 const mongoose = require("mongoose")
 const passport = require('passport')
@@ -18,8 +19,8 @@ const authController = require("./controllers/auth")
 // -----------------------------------------------------------
 // Declare or execute stuff
 const app = express()
-const PORT = 3000
-const dbURL = "mongodb://localhost:27017/events"
+const PORT = process.env.PORT
+const dbURL = process.env.MONGODB_URL
 const MongoDBStore = mongoDBSession(session)
 const sessionStore = new MongoDBStore({
   uri: dbURL,
@@ -28,13 +29,13 @@ const sessionStore = new MongoDBStore({
 
 
 // -----------------------------------------------------------
-// Middlewares
+// Activation Middlewares
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 app.use(
     session({
-        secret:"thisisnotgoodsecret",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         store: sessionStore

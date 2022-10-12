@@ -13,7 +13,7 @@ router.get("/", async (req,res) => {
     const events = await Event.find()
     res.render("index.ejs", {
         events, // destructing from events: events
-        tabTitle: "All Music Festivals Collection",
+        tabTitle: "All Music Festivals Collection"
     })
 })
 
@@ -22,7 +22,7 @@ router.get("/", async (req,res) => {
 // NEW
 router.get("/new", (req, res) => {
     res.render("new.ejs", {
-        tabTitle: "Add New Festival"
+        tabTitle: "Add New Music Festival"
     })
 })
 
@@ -36,7 +36,8 @@ router.post("/new", async (req, res) => {
         req.flash("success", "Added a new music festival!")
         res.redirect("/events")
     }
-    catch{
+    catch (error) {
+        req.flash("error", "Unable to add")
         res.redirect("/events/new")
     }
 })
@@ -44,16 +45,16 @@ router.post("/new", async (req, res) => {
 // -----------------------------------------------------------
 // EDIT & UPDATE
 // EDIT
-router.get("/:id/edit", async(req,res) => {
+router.get("/:id/edit", async (req,res) => {
     const event = await Event.findById(req.params.id)
     res.render("edit.ejs", {
-        event: event,
+        event, // destructing from event: event,
         tabTitle: "Edit This Festival"
     })
 })
 
 // UPDATE
-router.put("/:id", async(req,res) => {
+router.put("/:id", async (req,res) => {
     const event = await Event.findByIdAndUpdate
     (
         req.params.id,
@@ -69,14 +70,14 @@ router.put("/:id", async(req,res) => {
 // -----------------------------------------------------------
 // DELETE
 // Confirm to delete
-router.get("/:id/delete", async(req, res) => {
+router.get("/:id/delete", (req, res) => {
     res.render("confirm-delete.ejs", {
         id: req.params.id,
         tabTitle: "Confirmation to Delete"
     })
 })
 // DELETE
-router.delete("/:id", async(req, res) => {
+router.delete("/:id", async (req, res) => {
     const event = await Event.findByIdAndRemove(
         req.params.id
     )
@@ -87,11 +88,11 @@ router.delete("/:id", async(req, res) => {
 
 // -----------------------------------------------------------
 // SHOW
-router.get("/:id", async () => {
+router.get("/:id", async (req,res) => {
     // populate("user") -> display user's info
     const event = await Event.findById(req.params.id).populate("user")
     res.render("show.ejs", {
-        event: event,
+        event,
         tabTitle: event.title
     })
 })
