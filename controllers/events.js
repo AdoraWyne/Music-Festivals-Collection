@@ -3,6 +3,7 @@ const express = require("express")
 const ensureLogin = require("connect-ensure-login")
 
 const Event = require("../models/events")
+const upload = require("../middlewares/upload")
 const router = express.Router()
 router.use(ensureLogin.ensureLoggedIn())
 
@@ -27,7 +28,8 @@ router.get("/new", (req, res) => {
 })
 
 // CREATE
-router.post("/new", async (req, res) => {
+router.post("/new", upload.single("image"), async (req, res) => {
+    req.body.imageURL = req.file.path
     try{
         await Event.create(req.body)
         // Alternativaly for above line:
@@ -54,7 +56,10 @@ router.get("/:id/edit", async (req,res) => {
 })
 
 // UPDATE
-router.put("/:id", async (req,res) => {
+router.put("/:id", upload.single("image"), async (req,res) => {
+    if (req.file) {
+        req.body.imageURL = req.file.path
+    }
     const event = await Event.findByIdAndUpdate
     (
         req.params.id,

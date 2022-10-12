@@ -7,7 +7,7 @@
 </header>
 
 <main>
-    <form method="post" action="/events/<%= event._id %>?_method=PUT">
+    <form method="post" action="/events/<%= event._id %>?_method=PUT" enctype="multipart/form-data">
         <fieldset>
             <legend>Edit Here:</legend>
             <label for="title">Name:</label>
@@ -31,7 +31,7 @@
             <br />
             
             <label for="imageURL">Image Link:</label>
-            <input type="text" id="imageURL" name="imageURL" value="<%= event.imageURL %>" />
+            <input type="file" id="imageURL" name="imageURL" value="<%= event.imageURL %>" />
             
             <br />
             
