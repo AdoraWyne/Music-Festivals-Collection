@@ -81,7 +81,7 @@ app.use(errorHandler)
 // -----------------------------------------------------------
 // Listening or Connecting
 mongoose.connect(dbURL, () => {
-    console.log("Connecting to products db");
+    console.log("Connecting to events db");
 })
 
 app.listen(3000, () => {

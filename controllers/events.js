@@ -28,17 +28,24 @@ router.get("/new", (req, res) => {
 })
 
 // CREATE
-router.post("/new", upload.single("image"), async (req, res) => {
+router.post("/new", upload.single("imageURL"), async (req, res) => {
+    // console.log(req.body, req.file);
     req.body.imageURL = req.file.path
     try{
-        await Event.create(req.body)
+        // await Event.create(req.body)
         // Alternativaly for above line:
         // const event = new Event(req.body)
         // await event.save()
-        req.flash("success", "Added a new music festival!")
-        res.redirect("/events")
+        // testing for user as author, cuz I'm not sure how to use Event.create to include user._id
+        const event = new Event(req.body)
+        req.params.id = event._id
+        event.author = req.user._id
+        await event.save()
+        req.flash("success", `${event.title} is added`)
+        res.redirect(`/events/${req.params.id}`)
     }
     catch (error) {
+        console.log(error);
         req.flash("error", "Unable to add")
         res.redirect("/events/new")
     }
@@ -55,7 +62,8 @@ router.get("/:id/edit", async (req,res) => {
         }
         res.render("edit.ejs", {
             event, // destructing from event: event,
-            tabTitle: "Edit This Festival"
+            tabTitle: "Edit This Festival",
+            categories: Event.schema.path('category').enumValues
         })
     } catch {
         next ()
@@ -63,7 +71,7 @@ router.get("/:id/edit", async (req,res) => {
 })
 
 // UPDATE
-router.put("/:id", upload.single("image"), async (req,res) => {
+router.put("/:id", upload.single("imageURL"), async (req,res) => {
     if (req.file) {
         req.body.imageURL = req.file.path
     }
@@ -73,9 +81,7 @@ router.put("/:id", upload.single("image"), async (req,res) => {
         req.body,
         {new: true}
     )
-    req.flash("success", `This music festival is updated`)
-    // req.flash("success", `${event.title} is updated`)
-    // req.flash("success", `${req.body.title} is updated`)
+    req.flash("success", `${event.title} is updated`)
     res.redirect(`/events/${req.params.id}`)
 })
 
@@ -93,17 +99,17 @@ router.delete("/:id", async (req, res) => {
     const event = await Event.findByIdAndRemove(
         req.params.id
     )
-    req.flash("success", `This music festival is deleted`)
+    req.flash("success", `${event.title} is deleted`)
     res.redirect("/events")
 })
 
 
 // -----------------------------------------------------------
 // SHOW
-router.get("/:id", async (req,res) => {
+router.get("/:id", async (req, res, next) => {
     try {
         // populate("user") -> display user's info
-        const event = await Event.findById(req.params.id).populate("user")
+        const event = await Event.findById(req.params.id).populate("author")
         if (event) {
         res.render("show.ejs", {
             event,

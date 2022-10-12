@@ -52,8 +52,8 @@ router.get("/login", (req,res) => {
 // but if I want to flash success msg after login
 router.post("/login", 
     passport.authenticate("local", {
-    failureMessage: true,
-    failureRedirect: "/events/login"
+    failureRedirect: "/events/login",
+    failureFlash: true
 }), (req,res) => {
     req.flash("success", "Welcome Back!")
     res.redirect("/events")

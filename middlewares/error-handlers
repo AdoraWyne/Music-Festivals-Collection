@@ -1,9 +1,13 @@
 const notFoundHandler = (req, res) => {
-  res.status(404).render('errorHandlers/404.ejs')
+  res.status(404).render('404.ejs', {
+    tabTitle: "Error"
+  })
 }
 
 const errorHandler = (error, req, res, next) => {
-    res.status(500).render('errorHandlers/500.ejs')
+    res.status(500).render('500.ejs', {
+      tabTitle: "Error"
+    })
   }
 
 module.exports = {

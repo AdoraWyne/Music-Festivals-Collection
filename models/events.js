@@ -12,13 +12,16 @@ const eventSchema = new Schema ({
     imageURL: String,
     category: {
         type: String,
-        enum: ["Mixed genres", "Trance", "Techno", "House", "DnB", "Trap", "Hardstyle", "Others"]
+        enum: ["Mixed genres", "Trance", "Techno", "House", "DnB", "Trap", "Hardstyle", "Others", ""]
     },
     rating: {type: Number, min: 0, max: 5},
     attended: Boolean,
     price: Number,
     comment: String,
-    author: {type: Schema.Types.ObjectId, ref: "User"}
+    author: {
+        type: Schema.Types.ObjectId, 
+        ref: "User"
+    }
 })
 
 // model
