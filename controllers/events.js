@@ -48,11 +48,18 @@ router.post("/new", upload.single("image"), async (req, res) => {
 // EDIT & UPDATE
 // EDIT
 router.get("/:id/edit", async (req,res) => {
-    const event = await Event.findById(req.params.id)
-    res.render("edit.ejs", {
-        event, // destructing from event: event,
-        tabTitle: "Edit This Festival"
-    })
+    try {
+        const event = await Event.findById(req.params.id)
+        if (!event) {
+            throw new Error("Not Found")
+        }
+        res.render("edit.ejs", {
+            event, // destructing from event: event,
+            tabTitle: "Edit This Festival"
+        })
+    } catch {
+        next ()
+    }
 })
 
 // UPDATE
@@ -94,12 +101,20 @@ router.delete("/:id", async (req, res) => {
 // -----------------------------------------------------------
 // SHOW
 router.get("/:id", async (req,res) => {
-    // populate("user") -> display user's info
-    const event = await Event.findById(req.params.id).populate("user")
-    res.render("show.ejs", {
-        event,
-        tabTitle: event.title
-    })
+    try {
+        // populate("user") -> display user's info
+        const event = await Event.findById(req.params.id).populate("user")
+        if (event) {
+        res.render("show.ejs", {
+            event,
+            tabTitle: event.title
+        })
+    } else {
+        throw new Error ("Music Festival not found")
+    }
+    } catch {
+        next ()
+    }
 })
 
 // -----------------------------------------------------------

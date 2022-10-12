@@ -10,6 +10,7 @@ const session = require("express-session")
 const flash = require('express-flash')
 const mongoDBSession = require("connect-mongodb-session")
 
+const { notFoundHandler, errorHandler } = require('./middlewares/error-handlers')
 const Event = require("./models/events")
 const eventsController = require("./controllers/events")
 const User = require("./models/users")
@@ -63,6 +64,9 @@ app.get("/homeBeforeLogin", (req,res) => {
 // prefix my routes here for events both controllers
 app.use("/events", authController)
 app.use("/events", eventsController)
+// error
+app.use(notFoundHandler)
+app.use(errorHandler)
 
 
 
