@@ -64,7 +64,7 @@ router.post("/login",
 router.post("/logout", (req,res) => {
     req.logout(() => {
         req.flash("success", "Sayonara!")
-        res.redirect("/events/homeBeforeLogin")
+        res.redirect("/events/login")
     })
 })
 

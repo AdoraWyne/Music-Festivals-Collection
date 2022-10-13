@@ -4,69 +4,88 @@
 
 <header>
     <h1>Add New Music Festival to Collections</h1>
-    <!-- a link back to the collection main page-->
-    <a href="/events">Back to All Collections Page</a>
 </header>
 
 <main>
     <form method="post" action="/events/new" enctype="multipart/form-data">
-        <label for="title">Name:</label>
-        <input type="text" id="title" name="title" required />
+        <div class="form-group">
+            <label for="title">Name:</label>
+            <input type="text" id="title" name="title" class="form-control" aria-describedby="event-title" placeholder="Enter title" required />
+            <small id="event-title" class="form-text text-muted">*Required</small>
+        </div>
 
         <br />
 
-        <label for="website">Website:</label>
-        <input type="url" id="website" name="website" />
+        <div class="form-group">
+            <label for="website">Website:</label>
+            <input type="url" id="website" name="website" class="form-control" placeholder="https://example.com" />
+        </div>
 
         <br />
 
-        <label for="location">Where:</label>
-        <input type="text" id="location" name="location" required />
+        <div class="row">
+            <div class="col">
+              <label for="location">Where:</label>
+              <input type="text" id="location" name="location" class="form-control" aria-describedby="event-location" placeholder="Where?" required />
+              <small id="event-location" class="form-text text-muted">*Required</small>
+            </div>
+            <div class="col">
+              <label for="date">When:</label>
+              <input type="text" id="date" name="date" class="form-control" placeholder="When?" />
+            </div>
+        </div>
+
+        <br />
+        
+        <div class="form-group">
+            <label for="imageURL">Image Link:</label>
+            <input type="file" id="imageURL" name="imageURL" class="form-control-file" aria-describedby="event-img" required />
+            <small id="event-img" class="form-text text-muted">*Required</small>
+        </div>
+
+        <br />
+        
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select class="form-control" name="category" id="category">
+                <option value="">--Please choose an option--</option>
+                <option value="Mixed genres">Mixed genres</option>
+                <option value="Trance">Trance</option>
+                <option value="Techno">Techno</option>
+                <option value="House">House</option>
+                <option value="DnB">DnB</option>
+                <option value="Trap">Trap</option>
+                <option value="Hardstyle">Hardstyle</option>
+                <option value="Others">Others</option>
+            </select>
+        </div>
+
+        <br />
+        
+        <div class="row">
+            <div class="col">
+                <label for="rating">Rating:</label>
+                <input type="number" id="rating" name="rating" min="0" max="5" class="form-control" />
+            </div>
+            <div class="col">
+                <label for="price">Ticket Price:</label>
+                <input type="number" id="price" name="price" min="0" step="0.01" class="form-control" />
+            </div>
+        </div>
+        
+        <br />
+        
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" name="description" id="description" row="3"></textarea>
+        </div>
 
         <br />
 
-        <label for="date">When:</label>
-        <input type="text" id="date" name="date" />
-
-        <br />
-        
-        <label for="imageURL">Image Link:</label>
-        <input type="file" id="imageURL" name="imageURL" required />
-        
-        <br />
-        
-        <label for="category">Category:</label>
-        <select name="category" id="category">
-            <option value="">--Please choose an option--</option>
-            <option value="Mixed genres">Mixed genres</option>
-            <option value="Trance">Trance</option>
-            <option value="Techno">Techno</option>
-            <option value="House">House</option>
-            <option value="DnB">DnB</option>
-            <option value="Trap">Trap</option>
-            <option value="Hardstyle">Hardstyle</option>
-            <option value="Others">Others</option>
-        </select>
-        
-        <br />
-        
-        <label for="rating">Rating:</label>
-        <input type="number" id="rating" name="rating" min="0" max="5" />
-        
-        <br />
-        
-        <label for="price">Ticket Price:</label>
-        <input type="number" id="price" name="price" min="0" step="0.01" />
-        
-        <br />
-        
-        <label for="description">Description:</label>
-        <textarea name="description" id="description"></textarea>
-
-        <br />
-
-        <label for="comment">Comment:</label>
-        <textarea name="comment" id="comment"></textarea>
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" name="comment" id="comment" row="3"></textarea>
+        </div>
 
         <br />
 

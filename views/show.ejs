@@ -30,7 +30,7 @@
         <button>Added into Wishlist</button>
         <% } else {  %>
         <form method="post" action="/events/wishlist/<%= event._id %>?_method=PUT">
-            <button type="submit">Add to Wishlist</button>
+            <button type="submit" class="btn btn-outline-primary">Add to Wishlist</button>
         </form>
         <% }  %>
     

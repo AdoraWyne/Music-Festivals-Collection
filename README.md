@@ -33,4 +33,19 @@ app.use("/events", eventsController)
     <% } %>
 ```
 
+```
+<label for="category">Category:</label>
+            <select name="category" id="category">
+                <% categories.forEach((category) => { %>
+                    <option <%= category === event.category ? 'selected' : '' %>><%= category %></>
+                  <% }) %>
+            </select>
+```
 <!-- &copy; -->
+
+# Credits:
+Icon: https://icons8.com/
+Unsplash: https://unsplash.com/
+
+# need to solve:
+- how to retain image file on edit.ejs

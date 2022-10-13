@@ -7,14 +7,29 @@
     <p>A place where you can find or store your favourite music festivals!</p>
 </header>
 
-<main class="container">
-    <!-- <% if (events.length === 0) { %>
+<!-- Turned main to grid -->
+<main class="container"> 
+    <% if (events.length === 0) { %>
         <p>Add music festivals to the collections <a href="/events/new">here</a>!</p>
-    <%  } else { %> -->
+    <%  } else { %>
     <% events.forEach((event) => { %>
-        <ul>
-            <li><a href="/events/<%= event._id %>"><%= event.title %></a></li>    
-        </ul>
+        <div class="card mb-3">
+            <!-- row has 12 spaces -->
+            <div class="row">
+                <!-- this col takes up 8 spaces -->
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= event.title %></h5>
+                        <p class="card-text"><%= event.location %> in <%= event.date %></p>
+                        <p class="card-text">Category: <%= event.category %></p>
+                        <p class="card-link"><a href="/events/<%= event._id %>">Read More...</a></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-fluid" src="<%= event.imageURL %>" alt="<%= event.title %>" />
+                </div>
+            </div>
+        </div>
     <% }) %>
     <!-- <% } %> -->
     

@@ -3,24 +3,33 @@
 <%- include('./partials/flash.ejs') %>
 
 <header>
-    <h1>Login</h1>
-    <a href="/homeBeforeLogin">Back to Home</a>
+    <h1>Welcome to RobDido Music Festival Collections App!</h1>
 </header>
 
 <main>
     <form method="post" action="/events/login">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" aria-describedby="login" placeholder="Enter username" required />
+            <small id="login" class="form-text text-muted">*Required</small>
+        </div>
 
         <br />
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+        </div>
 
         <br />
 
         <button type="submit" class="btn btn-outline-success">LOGIN</button>
     </form>
+
+    <!-- Register buttons -->
+    <div>
+        <p>Not a member? <a href="/events/register">Register</a></p>
+    </div>
 </main>
 
 

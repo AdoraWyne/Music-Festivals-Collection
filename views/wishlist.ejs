@@ -11,7 +11,7 @@
         <ul>
             <li><a href="/events/<%= wishlist._id %>"><%= wishlist.title %></a></li>
             <form method="post" action="/events/wishlist/delete/<%= wishlist._id %>?_method=PUT">
-                <button type="submit">Delete this from wishlist</button>
+                <button type="submit" class="btn btn-outline-primary">Delete this from wishlist</button>
             </form>
         </ul>
     <% }) %>
