@@ -1,18 +1,14 @@
 const User = require("../models/users")
 
-const notFoundHandler = async (req, res) => {
-  const user = await User.findOne(req.user._id)
+const notFoundHandler = (req, res) => {
   res.status(404).render('404.ejs', {
     tabTitle: "Error",
-    user
   })
 }
 
-const errorHandler = async (error, req, res, next) => {
-  const user = await User.findOne(req.user._id)
+const errorHandler = (error, req, res, next) => {
   res.status(500).render('500.ejs', {
     tabTitle: "Error",
-    user
   })
   }
 
