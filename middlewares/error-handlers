@@ -1,12 +1,12 @@
 const notFoundHandler = (req, res) => {
   res.status(404).render('404.ejs', {
-    tabTitle: "Error",
+    tabTitle: "Error"
   })
 }
 
 const errorHandler = (error, req, res, next) => {
   res.status(500).render('500.ejs', {
-    tabTitle: "Error",
+    tabTitle: "Error"
   })
   }
 

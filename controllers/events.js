@@ -8,7 +8,7 @@ const User = require("../models/users")
 const upload = require("../middlewares/upload")
 const { route } = require("./auth")
 const router = express.Router()
-router.use(ensureLogin.ensureLoggedIn())
+router.use(ensureLogin.ensureLoggedIn("/events/login"))
 
 
 // -----------------------------------------------------------
