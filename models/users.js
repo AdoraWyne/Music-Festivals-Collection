@@ -7,7 +7,6 @@ const {Schema} = mongoose
 
 // schema
 const userSchema = new Schema({
-    // festCollection: eventSchema,
     wishList: [{type: Schema.Types.ObjectId, ref: "Event"}]
 })
 

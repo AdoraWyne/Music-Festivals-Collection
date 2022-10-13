@@ -1,9 +1,12 @@
 // require stuff
 const express = require("express")
+const mongoose = require("mongoose")
 const ensureLogin = require("connect-ensure-login")
 
 const Event = require("../models/events")
+const User = require("../models/users")
 const upload = require("../middlewares/upload")
+const { route } = require("./auth")
 const router = express.Router()
 router.use(ensureLogin.ensureLoggedIn())
 
@@ -12,8 +15,10 @@ router.use(ensureLogin.ensureLoggedIn())
 // INDEX
 router.get("/", async (req,res) => {
     const events = await Event.find()
+    const user = await User.findOne(req.user._id)
     res.render("index.ejs", {
         events, // destructing from events: events
+        user,
         tabTitle: "All Music Festivals Collection"
     })
 })
@@ -21,8 +26,10 @@ router.get("/", async (req,res) => {
 // -----------------------------------------------------------
 // NEW & CREATE
 // NEW
-router.get("/new", (req, res) => {
+router.get("/new", async (req, res) => {
+    const user = await User.findOne(req.user._id)
     res.render("new.ejs", {
+        user,
         tabTitle: "Add New Music Festival"
     })
 })
@@ -45,10 +52,49 @@ router.post("/new", upload.single("imageURL"), async (req, res) => {
         res.redirect(`/events/${req.params.id}`)
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
         req.flash("error", "Unable to add")
         res.redirect("/events/new")
     }
+})
+
+// -----------------------------------------------------------
+// WISHLIST route
+// GET route
+router.get("/:username/wishlist", async (req, res) => {
+    const user = await User.findOne({username: req.params.username}).populate("wishList")
+    console.log(user);
+    res.render("wishlist.ejs", {
+        user: user,
+        tabTitle: "My Wishlist"
+    })
+})
+
+// add to wishlist route
+router.put("/wishlist/:id", async(req, res) => {
+    const event = await Event.findById(req.params.id)
+    const user = await User.findById(req.user._id.toString())
+    user.wishList.push(event)
+    await user.save()
+    res.redirect(`/events/${user.username}/wishlist`)
+})
+
+// delete wishlist route
+router.put("/wishlist/delete/:wishlistID", async (req,res)=> {
+    // const user = await User.findById(req.user._id.toString())
+    const abcd =  req.params.wishlistID
+    console.log(abcd);
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+          $pull: {
+            wishList: abcd
+          }
+        }
+      )
+      console.log(user);
+      req.flash("success", `The wishlist is deleted`)
+      res.redirect(`/events/${user.username}/wishlist`)
 })
 
 // -----------------------------------------------------------
@@ -57,12 +103,15 @@ router.post("/new", upload.single("imageURL"), async (req, res) => {
 router.get("/:id/edit", async (req,res) => {
     try {
         const event = await Event.findById(req.params.id)
+        const user = await User.findOne(req.user._id)
         if (!event) {
             throw new Error("Not Found")
         }
         res.render("edit.ejs", {
-            event, // destructing from event: event,
+            event, 
+            user,
             tabTitle: "Edit This Festival",
+            // new thing here: extract Event's category field into an array
             categories: Event.schema.path('category').enumValues
         })
     } catch {
@@ -88,9 +137,11 @@ router.put("/:id", upload.single("imageURL"), async (req,res) => {
 // -----------------------------------------------------------
 // DELETE
 // Confirm to delete
-router.get("/:id/delete", (req, res) => {
+router.get("/:id/delete", async (req, res) => {
+    const user = await User.findOne(req.user._id)
     res.render("confirm-delete.ejs", {
         id: req.params.id,
+        user,
         tabTitle: "Confirmation to Delete"
     })
 })
@@ -108,11 +159,18 @@ router.delete("/:id", async (req, res) => {
 // SHOW
 router.get("/:id", async (req, res, next) => {
     try {
-        // populate("user") -> display user's info
         const event = await Event.findById(req.params.id).populate("author")
+        const user = await User.findOne(req.user._id).populate("wishList")
+        const isInWishlist = user.wishList.some((item) => {
+            return item.title === event.title 
+        })
+        console.log(isInWishlist);
+        // if return true, means the event is in the wishlist. button: "Added to wishlist"
         if (event) {
         res.render("show.ejs", {
             event,
+            user,
+            isInWishlist,
             tabTitle: event.title
         })
     } else {

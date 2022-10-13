@@ -52,7 +52,7 @@ passport.deserializeUser(User.deserializeUser())
 
 // -----------------------------------------------------------
 // homeBeforelogin route
-app.get("/homeBeforeLogin", (req,res) => {
+app.get("/events/homeBeforeLogin", (req,res) => {
     res.render("homeBeforeLogin.ejs", {
         tabTitle: "Home"
     })
@@ -65,8 +65,8 @@ app.get("/homeBeforeLogin", (req,res) => {
 app.use("/events", authController)
 app.use("/events", eventsController)
 // error
-app.use(notFoundHandler)
-app.use(errorHandler)
+// app.use(notFoundHandler)
+// app.use(errorHandler)
 
 
 

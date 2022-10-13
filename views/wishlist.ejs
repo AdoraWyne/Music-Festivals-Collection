@@ -1,0 +1,21 @@
+<%- include("./partials/head.ejs") %>
+
+<%- include('./partials/flash.ejs') %>
+
+<header>
+    <h1>My Wishlist</h1>
+</header>
+
+<main class="container">
+    <% user.wishList.forEach((wishlist) => { %>
+        <ul>
+            <li><a href="/events/<%= wishlist._id %>"><%= wishlist.title %></a></li>
+            <form method="post" action="/events/wishlist/delete/<%= wishlist._id %>?_method=PUT">
+                <button type="submit">Delete this from wishlist</button>
+            </form>
+        </ul>
+    <% }) %>
+    
+</main>
+
+<%- include("./partials/foot.ejs") %>

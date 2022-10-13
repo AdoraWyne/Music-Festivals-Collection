@@ -25,6 +25,15 @@
     <p>Read More Details at <a href="<%= event.website %>">here</a>.</p>
     <!-- event.author.username comes from populate("user") -->
     <p>Created by <%= event.author.username %>.</p>
+
+    <% if (isInWishlist) { %>
+        <button>Added into Wishlist</button>
+        <% } else {  %>
+        <form method="post" action="/events/wishlist/<%= event._id %>?_method=PUT">
+            <button type="submit">Add to Wishlist</button>
+        </form>
+        <% }  %>
+    
 </main>
 
 <%- include("./partials/foot.ejs") %>

@@ -12,8 +12,22 @@
 </head>
 <body>
 
-    <% if (tabTitle !== "Registration" && tabTitle !== "Login" && tabTitle !== "Home") { %>
-    <form action="/events/logout" method="post">
-        <button type="submit" class="btn btn-outline-secondary btn-sm">Logout</button>
-      </form>
-      <% } %>
+    <!-- nav bar from Bootstrap -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #D58BDD;">
+        <a class="navbar-brand" href="/events">RobDido</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="/events/new">New Music Festival</a>
+            <a class="nav-link" href="/events/<%= user.username %>/wishlist" target="_blank">My Wishlist</a>
+            <% if (tabTitle !== "Registration" && tabTitle !== "Login" && tabTitle !== "Home") { %>
+                <form action="/events/logout" method="post">
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">Logout</button>
+                </form>
+            <% } %>
+          </div>
+        </div>
+      </nav>
+   
