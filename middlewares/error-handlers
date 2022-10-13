@@ -1,5 +1,3 @@
-const User = require("../models/users")
-
 const notFoundHandler = (req, res) => {
   res.status(404).render('404.ejs', {
     tabTitle: "Error",
