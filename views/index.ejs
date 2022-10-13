@@ -7,8 +7,7 @@
     <p>A place where you can find or store your favourite music festivals!</p>
 </header>
 
-<!-- Turned main to grid -->
-<main class="container"> 
+<main> 
     <% if (events.length === 0) { %>
         <p>Add music festivals to the collections <a href="/events/new">here</a>!</p>
     <%  } else { %>
@@ -19,7 +18,7 @@
                 <!-- this col takes up 8 spaces -->
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><%= event.title %></h5>
+                        <h5 class="card-title"><a href="/events/<%= event._id %>"><%= event.title %></a></h5>
                         <p class="card-text"><%= event.location %> in <%= event.date %></p>
                         <p class="card-text">Category: <%= event.category %></p>
                         <p class="card-link"><a href="/events/<%= event._id %>">Read More...</a></p>
@@ -31,8 +30,7 @@
             </div>
         </div>
     <% }) %>
-    <!-- <% } %> -->
-    
+    <% } %>
 </main>
 
 <%- include("./partials/foot.ejs") %>

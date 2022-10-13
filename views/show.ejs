@@ -3,7 +3,7 @@
 <%- include('./partials/flash.ejs') %>
 
 <header>
-    <h1><%= event.title %></h1>
+    <h1 class="text-center"><%= event.title %></h1>
     <!-- a link to edit this music fest -->
     
     <!-- a link to delete this music fest-->
@@ -13,35 +13,35 @@
 <main>
     <div class="row">
         <div class="col-6 offset-3">
-            <div class="card">
+            <div class="card mb-3">
                 <img src="<%= event.imageURL %>" class="card-img-top" alt="<%= event.title %>">
                 <div class="card-body">
-                  <h5 class="card-title"><%= event.title %>
+                  <h5 class="card-title"><%= event.title %></h5>
                   <% if (isInWishlist) { %>
-                    <button class="btn btn-outline-secondary">Added into Wishlist</button>
+                    <button class="btn btn-outline-success">Added into Wishlist</button>
                     <% } else {  %>
-                    <form class="d-inline" method="post" action="/events/wishlist/<%= event._id %>?_method=PUT">
+                    <form method="post" action="/events/wishlist/<%= event._id %>?_method=PUT">
                         <button type="submit" class="btn btn-outline-success">Add to Wishlist</button>
                     </form>
                     <% }  %>
-                </h5>
                   <p class="card-text mt-2"><%= event.description %></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item text-muted"><%= event.location %> in <%= event.date %></li>
+                  <li class="list-group-item"><%= event.location %> in <%= event.date %></li>
                   <li class="list-group-item">Category: <%= event.category %></li>
                   <li class="list-group-item">Rating: <%= event.rating %> of 5</li>
-                  <li class="list-group-item">Ticket Price: <%= !event.price ? "-" : event.price %> %></li>
-                  <li class="list-group-item">Read More Details at <a href="<%= event.website %>">here</a>.</li>
-                  <li class="list-group-item text-muted">Created by <%= event.author.username %>.</li>
+                  <li class="list-group-item">Ticket Price ($): <%= !event.price ? "-" : event.price %> %></li>
+                  <li class="list-group-item">Read more details at <a href="<%= event.website %>">here</a>.</li>
                 </ul>
                 <div class="card-body">
                     <a class="card-link btn btn-outline-warning" href="/events/<%= event._id %>/edit">Edit</a>
-                    <a class="card-link btn btn-outline-danger" href="/events/<%= event._id %>/delete">Delete</a>
-                    <form class="d-inline" method="post" action="/events/<%= event._id %>?_method=DELETE">
+                    <form class="d-inline" method="post" action="/events/<%= event.id %>?_method=DELETE">
                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                     </form>
                 </div>
+                <div class="card-footer text-muted">
+                    Created by <%= event.author.username %>.
+                  </div>
               </div>
         </div>
     </div>

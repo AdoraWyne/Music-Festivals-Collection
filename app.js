@@ -51,22 +51,13 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 // -----------------------------------------------------------
-// homeBeforelogin route
-// app.get("/events/homeBeforeLogin", (req,res) => {
-//     res.render("homeBeforeLogin.ejs", {
-//         tabTitle: "Home"
-//     })
-// })
-
-
-// -----------------------------------------------------------
 // export from controller
 // prefix my routes here for events both controllers
 app.use("/events", authController)
 app.use("/events", eventsController)
 // error
-// app.use(notFoundHandler)
-// app.use(errorHandler)
+app.use(notFoundHandler)
+app.use(errorHandler)
 
 // -----------------------------------------------------------
 // Listening or Connecting

@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Combo&family=Dangrek&family=Merriweather&family=Montserrat&family=Sacramento&display=swap');
+
+* {
+    font-family: 'Dangrek', cursive;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* Social media img style - otherwise the img too big */
+footer img {
+    width: 40px;
+    height: 40px;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* Fixing spacing  */
+header,
+main {
+    margin: 10px;
+    padding: 10px
+}
+
+header {
+    margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* Make brand name bigger */
+.navbar-brand {
+    font-size: 2rem;
+}

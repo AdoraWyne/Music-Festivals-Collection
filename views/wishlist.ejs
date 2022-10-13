@@ -6,16 +6,31 @@
     <h1>My Wishlist</h1>
 </header>
 
-<main class="container">
-    <% user.wishList.forEach((wishlist) => { %>
-        <ul>
-            <li><a href="/events/<%= wishlist._id %>"><%= wishlist.title %></a></li>
-            <form method="post" action="/events/wishlist/delete/<%= wishlist._id %>?_method=PUT">
-                <button type="submit" class="btn btn-outline-primary">Delete this from wishlist</button>
-            </form>
-        </ul>
-    <% }) %>
-    
+<main>
+    <% if (user.wishList.length === 0) { %>
+        <p>Add music festivals to your wishlist! Browse <a href="/events">here</a>!</p>
+    <%  } else { %>
+        <% user.wishList.forEach((wishlist) => { %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= wishlist.title %></h5>
+                        <p class="card-text"><%= wishlist.location %> in <%= wishlist.date %></p>
+                        <p class="card-text">Category: <%= wishlist.category %></p>
+                        <p class="card-link"><a href="/events/<%= wishlist._id %>">Read More...</a></p>
+                        <form method="post" action="/events/wishlist/delete/<%= wishlist._id %>?_method=PUT">
+                            <button type="submit" class="btn btn-outline-danger">Delete this from wishlist</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-fluid" src="<%= wishlist.imageURL %>" alt="<%= wishlist.title %>" />
+                </div>
+            </div>
+        </div>
+        <% }) %>
+        <% } %>
 </main>
 
 <%- include("./partials/foot.ejs") %>

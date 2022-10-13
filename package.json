@@ -1,6 +1,9 @@
 {
   "name": "project-2",
   "version": "1.0.0",
+  "engines":{
+    "node": "18.9.1"
+  },
   "description": "",
   "main": "app.js",
   "scripts": {

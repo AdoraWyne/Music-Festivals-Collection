@@ -81,19 +81,17 @@ router.put("/wishlist/:id", async(req, res) => {
 
 // delete wishlist route
 router.put("/wishlist/delete/:wishlistID", async (req,res)=> {
-    // const user = await User.findById(req.user._id.toString())
-    const abcd =  req.params.wishlistID
     console.log(abcd);
     const user = await User.findByIdAndUpdate(
         req.user._id,
         {
           $pull: {
-            wishList: abcd
+            wishList: req.params.wishlistID
           }
         }
       )
       console.log(user);
-      req.flash("success", `The wishlist is deleted`)
+      req.flash("success", `Wishlist is updated`)
       res.redirect(`/events/${user.username}/wishlist`)
 })
 
@@ -135,16 +133,6 @@ router.put("/:id", upload.single("imageURL"), async (req,res) => {
 })
 
 // -----------------------------------------------------------
-// DELETE
-// Confirm to delete
-router.get("/:id/delete", async (req, res) => {
-    const user = await User.findOne(req.user._id)
-    res.render("confirm-delete.ejs", {
-        id: req.params.id,
-        user,
-        tabTitle: "Confirmation to Delete"
-    })
-})
 // DELETE
 router.delete("/:id", async (req, res) => {
     const event = await Event.findByIdAndRemove(
