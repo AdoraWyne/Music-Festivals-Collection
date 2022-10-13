@@ -31,7 +31,7 @@
                   <li class="list-group-item">Category: <%= event.category %></li>
                   <li class="list-group-item">Rating: <%= event.rating %> of 5</li>
                   <li class="list-group-item">Ticket Price ($): <%= !event.price ? "-" : event.price %> %></li>
-                  <li class="list-group-item">Read more details at <a href="<%= event.website %>">here</a>.</li>
+                  <li class="list-group-item">Read more details at <a href="<%= event.website %>" target="_blank">here</a>.</li>
                 </ul>
                 <div class="card-body">
                     <a class="card-link btn btn-outline-warning" href="/events/<%= event._id %>/edit">Edit</a>

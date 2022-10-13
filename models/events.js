@@ -1,7 +1,9 @@
+// -----------------------------------------------------------
 // require mongoose
 const mongoose = require("mongoose")
 const { Schema } = mongoose
 
+// -----------------------------------------------------------
 // schema structure
 const eventSchema = new Schema ({
     title: { type: String, require: true},
@@ -23,8 +25,10 @@ const eventSchema = new Schema ({
     }
 })
 
+// -----------------------------------------------------------
 // model
 const Event = mongoose.model("Event", eventSchema)
 
+// -----------------------------------------------------------
 // export
 module.exports = Event

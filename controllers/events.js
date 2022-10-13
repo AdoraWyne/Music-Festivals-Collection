@@ -81,7 +81,6 @@ router.put("/wishlist/:id", async(req, res) => {
 
 // delete wishlist route
 router.put("/wishlist/delete/:wishlistID", async (req,res)=> {
-    console.log(abcd);
     const user = await User.findByIdAndUpdate(
         req.user._id,
         {
@@ -152,7 +151,6 @@ router.get("/:id", async (req, res, next) => {
         const isInWishlist = user.wishList.some((item) => {
             return item.title === event.title 
         })
-        console.log(isInWishlist);
         // if return true, means the event is in the wishlist. button: "Added to wishlist"
         if (event) {
         res.render("show.ejs", {
