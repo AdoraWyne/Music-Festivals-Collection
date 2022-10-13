@@ -17,7 +17,6 @@ const eventSchema = new Schema ({
     rating: {type: Number, min: 0, max: 5},
     attended: Boolean,
     price: Number,
-    comment: String,
     author: {
         type: Schema.Types.ObjectId, 
         ref: "User"

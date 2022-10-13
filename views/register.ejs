@@ -4,22 +4,27 @@
 
 <header>
     <h1>Register</h1>
-    <a href="/events/login">Back to Home</a>
 </header>
 
 <main>
     <form method="post" action="/events/register">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" aria-describedby="register" placeholder="Enter username" required />
+            <small id="register" class="form-text text-muted">*Required</small>
+        </div>
 
         <br />
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" aria-describedby="password" placeholder="Enter password" required />
+            <small id="password" class="form-text text-muted">*Required</small>
+        </div>
 
         <br />
 
-        <button type="submit" class="btn btn-outline-success">Register!</button>
+        <button type="submit" class="btn btn-outline-success">Register</button>
     </form>
 </main>
 

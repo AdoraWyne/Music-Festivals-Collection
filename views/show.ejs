@@ -4,36 +4,47 @@
 
 <header>
     <h1><%= event.title %></h1>
-    <!-- a link back to the collection main page-->
-    <a href="/events">Back to All Collections Page</a>
     <!-- a link to edit this music fest -->
-    <a href="/events/<%= event._id %>/edit">Edit this Music Festival</a>
+    
     <!-- a link to delete this music fest-->
-    <a href="/events/<%= event._id %>/delete">Delete this Music Festival.</a>
+    
 </header>
 
 <main>
-    <h2><%= event.title %></h2>
-    <img src="<%= event.imageURL %>" alt="<%= event.title %>">
-    <p>Where: <%= event.location %></p>
-    <p>When: <%= event.date %></p>
-    <p>Category: <%= event.category %></p>
-    <p>Rating: <%= event.rating %> of 5</p>
-    <p>Ticket Price: <%= event.price %></p>
-    <p>Description: <%= event.description %></p>
-    <p>Note: <%= event.comment %></p>
-    <p>Read More Details at <a href="<%= event.website %>">here</a>.</p>
-    <!-- event.author.username comes from populate("user") -->
-    <p>Created by <%= event.author.username %>.</p>
-
-    <% if (isInWishlist) { %>
-        <button>Added into Wishlist</button>
-        <% } else {  %>
-        <form method="post" action="/events/wishlist/<%= event._id %>?_method=PUT">
-            <button type="submit" class="btn btn-outline-primary">Add to Wishlist</button>
-        </form>
-        <% }  %>
-    
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <img src="<%= event.imageURL %>" class="card-img-top" alt="<%= event.title %>">
+                <div class="card-body">
+                  <h5 class="card-title"><%= event.title %>
+                  <% if (isInWishlist) { %>
+                    <button class="btn btn-outline-secondary">Added into Wishlist</button>
+                    <% } else {  %>
+                    <form class="d-inline" method="post" action="/events/wishlist/<%= event._id %>?_method=PUT">
+                        <button type="submit" class="btn btn-outline-success">Add to Wishlist</button>
+                    </form>
+                    <% }  %>
+                </h5>
+                  <p class="card-text mt-2"><%= event.description %></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-muted"><%= event.location %> in <%= event.date %></li>
+                  <li class="list-group-item">Category: <%= event.category %></li>
+                  <li class="list-group-item">Rating: <%= event.rating %> of 5</li>
+                  <li class="list-group-item">Ticket Price: <%= !event.price ? "-" : event.price %> %></li>
+                  <li class="list-group-item">Read More Details at <a href="<%= event.website %>">here</a>.</li>
+                  <li class="list-group-item text-muted">Created by <%= event.author.username %>.</li>
+                </ul>
+                <div class="card-body">
+                    <a class="card-link btn btn-outline-warning" href="/events/<%= event._id %>/edit">Edit</a>
+                    <a class="card-link btn btn-outline-danger" href="/events/<%= event._id %>/delete">Delete</a>
+                    <form class="d-inline" method="post" action="/events/<%= event._id %>?_method=DELETE">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+              </div>
+        </div>
+    </div>
 </main>
 
 <%- include("./partials/foot.ejs") %>
