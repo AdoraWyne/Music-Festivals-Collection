@@ -18,3 +18,19 @@ app.use("/events", eventsController)
 ```
 
 - Take out logout button on Register & Login pages by editing head.ejs
+
+```
+<% for (let list of user.wishList) { %>
+        <% if (list.title === event.title) { %>
+            <% if (list._id.valueOf() === event._id.valueOf()) { %>
+                <button>Added into Wishlist</button>
+            <% } else if (list._id.valueOf() !== event._id.valueOf()) { %>
+                <form method="post" action="/events/wishlist/<%= event._id %>?_method=PUT">
+                    <button type="submit">Add to Wishlist</button>
+                </form>
+            <% } %>
+        <% } %>
+    <% } %>
+```
+
+<!-- &copy; -->
