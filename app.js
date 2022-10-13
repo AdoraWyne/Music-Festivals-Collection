@@ -65,6 +65,6 @@ mongoose.connect(dbURL, () => {
     console.log("Connecting to events db");
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log("Listening to port", PORT)
 })
