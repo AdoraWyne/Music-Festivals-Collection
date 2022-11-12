@@ -1,6 +1,6 @@
 # Project 2 - RobDido Music Festival Collection App
 A place where you can save your favorite electronic music festivals. 
-You may access it at [here](https://robdido.herokuapp.com/)
+You may access it at [here](https://robdido.herokuapp.com/events/login)
 You may use the following user information to sign in:
 - username: rubberdork
 - password: 123456
@@ -114,3 +114,5 @@ Images are from:
 - https://unsplash.com/
 - https://icons8.com/
 - https://www.flaticon.com/
+
+<!-- https://robdido.herokuapp.com/ -->
